@@ -7,27 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		905415EE1E0AEA32008055BC /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905415ED1E0AEA32008055BC /* RestApiManager.swift */; };
+		905415F11E0AEFB8008055BC /* BusLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905415F01E0AEFB8008055BC /* BusLine.swift */; };
 		9066B96E1DE5E9CE0080B513 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9066B96D1DE5E9CE0080B513 /* AppDelegate.swift */; };
 		9066B9701DE5E9CE0080B513 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9066B96F1DE5E9CE0080B513 /* FirstViewController.swift */; };
-		9066B9721DE5E9CE0080B513 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9066B9711DE5E9CE0080B513 /* SearchViewController.swift */; };
+		9066B9721DE5E9CE0080B513 /* LinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9066B9711DE5E9CE0080B513 /* LinesViewController.swift */; };
 		9066B9751DE5E9CF0080B513 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9066B9731DE5E9CF0080B513 /* Main.storyboard */; };
 		9066B9771DE5E9CF0080B513 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9066B9761DE5E9CF0080B513 /* Assets.xcassets */; };
 		9066B97A1DE5E9CF0080B513 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9066B9781DE5E9CF0080B513 /* LaunchScreen.storyboard */; };
 		9066B9821DE5F0690080B513 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9066B9811DE5F0690080B513 /* MapViewController.swift */; };
+		90C0D9081E0D689300FC9AD6 /* ic_directions_bus_48pt_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C0D9021E0D689300FC9AD6 /* ic_directions_bus_48pt_2x.png */; };
+		90C0D9091E0D689300FC9AD6 /* ic_directions_bus_48pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C0D9031E0D689300FC9AD6 /* ic_directions_bus_48pt_3x.png */; };
+		90C0D90A1E0D689300FC9AD6 /* ic_directions_bus_48pt.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C0D9041E0D689300FC9AD6 /* ic_directions_bus_48pt.png */; };
+		90C0D9111E0D6ABB00FC9AD6 /* ic_tram_48pt_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C0D90E1E0D6ABB00FC9AD6 /* ic_tram_48pt_2x.png */; };
+		90C0D9121E0D6ABB00FC9AD6 /* ic_tram_48pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C0D90F1E0D6ABB00FC9AD6 /* ic_tram_48pt_3x.png */; };
+		90C0D9131E0D6ABB00FC9AD6 /* ic_tram_48pt.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C0D9101E0D6ABB00FC9AD6 /* ic_tram_48pt.png */; };
 		DA7CA163BA4E14701E27E59F /* Pods_ProjectTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CA837E01E36951B0A823E9 /* Pods_ProjectTransport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0969663E484E514DF2A017A2 /* Pods-ProjectTransport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTransport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectTransport/Pods-ProjectTransport.debug.xcconfig"; sourceTree = "<group>"; };
+		905415ED1E0AEA32008055BC /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
+		905415F01E0AEFB8008055BC /* BusLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusLine.swift; sourceTree = "<group>"; };
 		9066B96A1DE5E9CE0080B513 /* ProjectTransport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectTransport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9066B96D1DE5E9CE0080B513 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9066B96F1DE5E9CE0080B513 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		9066B9711DE5E9CE0080B513 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		9066B9711DE5E9CE0080B513 /* LinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesViewController.swift; sourceTree = "<group>"; };
 		9066B9741DE5E9CF0080B513 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9066B9761DE5E9CF0080B513 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9066B9791DE5E9CF0080B513 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9066B97B1DE5E9CF0080B513 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9066B9811DE5F0690080B513 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		90C0D9021E0D689300FC9AD6 /* ic_directions_bus_48pt_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_directions_bus_48pt_2x.png; path = Images/ic_directions_bus_48pt_2x.png; sourceTree = "<group>"; };
+		90C0D9031E0D689300FC9AD6 /* ic_directions_bus_48pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_directions_bus_48pt_3x.png; path = Images/ic_directions_bus_48pt_3x.png; sourceTree = "<group>"; };
+		90C0D9041E0D689300FC9AD6 /* ic_directions_bus_48pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_directions_bus_48pt.png; path = Images/ic_directions_bus_48pt.png; sourceTree = "<group>"; };
+		90C0D90E1E0D6ABB00FC9AD6 /* ic_tram_48pt_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_tram_48pt_2x.png; path = Images/ic_tram_48pt_2x.png; sourceTree = "<group>"; };
+		90C0D90F1E0D6ABB00FC9AD6 /* ic_tram_48pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_tram_48pt_3x.png; path = Images/ic_tram_48pt_3x.png; sourceTree = "<group>"; };
+		90C0D9101E0D6ABB00FC9AD6 /* ic_tram_48pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_tram_48pt.png; path = Images/ic_tram_48pt.png; sourceTree = "<group>"; };
 		9675C60BAB5DA210C18D4BAA /* Pods-ProjectTransport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTransport.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectTransport/Pods-ProjectTransport.release.xcconfig"; sourceTree = "<group>"; };
 		A5CA837E01E36951B0A823E9 /* Pods_ProjectTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -44,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		905415EF1E0AEF89008055BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				905415F01E0AEFB8008055BC /* BusLine.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		9066B9611DE5E9CE0080B513 = {
 			isa = PBXGroup;
 			children = (
@@ -65,17 +89,32 @@
 		9066B96C1DE5E9CE0080B513 /* ProjectTransport */ = {
 			isa = PBXGroup;
 			children = (
-				9068EED11DE601170065D0BC /* images */,
+				90C0D8F71E0D64B800FC9AD6 /* Images */,
+				905415EF1E0AEF89008055BC /* Model */,
 				9066B96D1DE5E9CE0080B513 /* AppDelegate.swift */,
 				9066B96F1DE5E9CE0080B513 /* FirstViewController.swift */,
-				9066B9711DE5E9CE0080B513 /* SearchViewController.swift */,
+				9066B9711DE5E9CE0080B513 /* LinesViewController.swift */,
 				9066B9731DE5E9CF0080B513 /* Main.storyboard */,
 				9066B9761DE5E9CF0080B513 /* Assets.xcassets */,
 				9066B9781DE5E9CF0080B513 /* LaunchScreen.storyboard */,
 				9066B97B1DE5E9CF0080B513 /* Info.plist */,
 				9066B9811DE5F0690080B513 /* MapViewController.swift */,
+				905415ED1E0AEA32008055BC /* RestApiManager.swift */,
 			);
 			path = ProjectTransport;
+			sourceTree = "<group>";
+		};
+		90C0D8F71E0D64B800FC9AD6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				90C0D9021E0D689300FC9AD6 /* ic_directions_bus_48pt_2x.png */,
+				90C0D9031E0D689300FC9AD6 /* ic_directions_bus_48pt_3x.png */,
+				90C0D9041E0D689300FC9AD6 /* ic_directions_bus_48pt.png */,
+				90C0D90E1E0D6ABB00FC9AD6 /* ic_tram_48pt_2x.png */,
+				90C0D90F1E0D6ABB00FC9AD6 /* ic_tram_48pt_3x.png */,
+				90C0D9101E0D6ABB00FC9AD6 /* ic_tram_48pt.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		A744E10A7AE9AD8C32BC8A1E /* Frameworks */ = {
@@ -156,9 +195,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90C0D90A1E0D689300FC9AD6 /* ic_directions_bus_48pt.png in Resources */,
+				90C0D9121E0D6ABB00FC9AD6 /* ic_tram_48pt_3x.png in Resources */,
+				90C0D9081E0D689300FC9AD6 /* ic_directions_bus_48pt_2x.png in Resources */,
 				9066B97A1DE5E9CF0080B513 /* LaunchScreen.storyboard in Resources */,
+				90C0D9111E0D6ABB00FC9AD6 /* ic_tram_48pt_2x.png in Resources */,
 				9066B9771DE5E9CF0080B513 /* Assets.xcassets in Resources */,
-				9068EED31DE6013E0065D0BC /* bus1.png in Resources */,
+				90C0D9091E0D689300FC9AD6 /* ic_directions_bus_48pt_3x.png in Resources */,
+				90C0D9131E0D6ABB00FC9AD6 /* ic_tram_48pt.png in Resources */,
 				9066B9751DE5E9CF0080B513 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,9 +262,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9066B9721DE5E9CE0080B513 /* SearchViewController.swift in Sources */,
+				9066B9721DE5E9CE0080B513 /* LinesViewController.swift in Sources */,
 				9066B96E1DE5E9CE0080B513 /* AppDelegate.swift in Sources */,
 				9066B9701DE5E9CE0080B513 /* FirstViewController.swift in Sources */,
+				905415EE1E0AEA32008055BC /* RestApiManager.swift in Sources */,
+				905415F11E0AEFB8008055BC /* BusLine.swift in Sources */,
 				9066B9821DE5F0690080B513 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
