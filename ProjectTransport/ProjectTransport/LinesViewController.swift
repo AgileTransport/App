@@ -9,12 +9,13 @@
 import UIKit
 import SwiftyJSON
 
-class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate , UISearchResultsUpdating, ShowDetailDelegate  {
 
     var busLines = [BusLine]()
+    var filteredBusLines = [BusLine]()
     
     @IBOutlet var tableViewWidget: UITableView!
-    
+    let searchController = UISearchController(searchResultsController: nil)
     
     
     override func viewDidLoad() {
@@ -23,9 +24,25 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         tableViewWidget.dataSource = self
         tableViewWidget.delegate = self
         loadLines()
-        //tableViewWidget.separatorColor = UIColor.redColor()
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableViewWidget.tableHeaderView = searchController.searchBar
     }
 
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredBusLines = busLines.filter { line in
+            return line.id.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        tableViewWidget.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -33,6 +50,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredBusLines.count
+        }
         return  busLines.count
         
     }
@@ -55,9 +75,14 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         
         let myCell:UITableViewCell = tableViewWidget.dequeueReusableCellWithIdentifier("prototype1",
             forIndexPath: indexPath)
+        var line:BusLine
+        if searchController.active && searchController.searchBar.text != "" {
+            line = filteredBusLines[indexPath.row]
+        } else {
+            line = busLines[indexPath.row]
+        }
         
-        let line = busLines[indexPath.row]
-                myCell.textLabel?.text = line.id
+        myCell.textLabel?.text = line.id
         
         configureIconForBusLine(myCell, line: line)
         configureCellStyle(myCell)
@@ -93,11 +118,38 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         /*cell.separatorInset = UIEdgeInsetsZero
         cell.layoutMargins = UIEdgeInsetsZero
         cell.separatorInset.left = 0*/
-        cell.backgroundColor = UIColor.whiteColor()
-        cell.layer.borderColor = UIColor.lightGrayColor().CGColor
-        cell.layer.borderWidth = 1
+        cell.backgroundColor = UIColor.clearColor()
+        cell.layer.borderColor = UIColor.clearColor().CGColor
+        cell.layer.borderWidth = 2
         cell.layer.cornerRadius = 8
         cell.clipsToBounds = true
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue,
+        sender: AnyObject?) {
+            
+            if segue.identifier == "ShowTimeTable" {
+                // 2
+                let navigationController = segue.destinationViewController
+                    as! UINavigationController
+                // 3
+                let controller = navigationController.topViewController
+                    as! TimeTableViewController
+                // 4
+                controller.delegate = self
+                
+                
+                if let indexPath = tableViewWidget.indexPathForCell(
+                    sender as! UITableViewCell) {
+                        
+                        var line:BusLine
+                        if searchController.active && searchController.searchBar.text != "" {
+                            line = filteredBusLines[indexPath.row]
+                        } else {
+                            line = busLines[indexPath.row]
+                        }
+                        controller.line = line                }
+            }
     }
     
 }

@@ -24,6 +24,15 @@ class RestApiManager: NSObject {
         })
     }
     
+    /**
+     * API which gets all the lines
+     **/
+    func getTimeTableOfLine(onCompletion: (JSON) -> Void, lineName:String ) {
+        let route = baseURL + "Timetable/" + lineName
+        makeHTTPGetRequest(route, onCompletion: { json, err in
+            onCompletion(json as JSON)
+        })
+    }
     func makeHTTPGetRequest(path: String, onCompletion: ServiceResponse) {
         let request = NSMutableURLRequest(URL: NSURL(string: path)!)
         
