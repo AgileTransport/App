@@ -50,15 +50,20 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return 1
+        
+    }
+    
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if searchController.active && searchController.searchBar.text != "" {
             return filteredBusLines.count
         }
         return  busLines.count
-        
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10.0; // space b/w cells
+        return 5.0; // space b/w cells
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -77,9 +82,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             forIndexPath: indexPath)
         var line:BusLine
         if searchController.active && searchController.searchBar.text != "" {
-            line = filteredBusLines[indexPath.row]
+            line = filteredBusLines[indexPath.section]
         } else {
-            line = busLines[indexPath.row]
+            line = busLines[indexPath.section]
         }
         
         myCell.textLabel?.text = line.id
@@ -144,9 +149,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                         
                         var line:BusLine
                         if searchController.active && searchController.searchBar.text != "" {
-                            line = filteredBusLines[indexPath.row]
+                            line = filteredBusLines[indexPath.section]
                         } else {
-                            line = busLines[indexPath.row]
+                            line = busLines[indexPath.section]
                         }
                         controller.line = line                }
             }

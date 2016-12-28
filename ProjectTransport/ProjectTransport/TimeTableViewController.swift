@@ -51,17 +51,24 @@ class TimeTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return timeTableList.count
+        return 1
         
     }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5.0; // space b/w cells
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return timeTableList.count    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         
         let myCell = timeTable!.dequeueReusableCellWithIdentifier("timetablecell",
             forIndexPath: indexPath) as! TimeTableCustomCell
-        myCell.endOneTimeLabel.text = timeTableList[indexPath.row].endOneTime
-        myCell.endTwoTimeLabel.text = timeTableList[indexPath.row].endTwoTime
+        myCell.endOneTimeLabel.text = timeTableList[indexPath.section].endOneTime
+        myCell.endTwoTimeLabel.text = timeTableList[indexPath.section].endTwoTime
         return myCell
 
     }
