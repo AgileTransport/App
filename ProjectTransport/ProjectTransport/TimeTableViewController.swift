@@ -69,8 +69,69 @@ class TimeTableViewController: UIViewController, UITableViewDataSource, UITableV
             forIndexPath: indexPath) as! TimeTableCustomCell
         myCell.endOneTimeLabel.text = timeTableList[indexPath.section].endOneTime
         myCell.endTwoTimeLabel.text = timeTableList[indexPath.section].endTwoTime
+        
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components( [NSCalendarUnit.Hour, NSCalendarUnit.Minute], fromDate: date)
+        let nowHour = components.hour
+        let nowMin = components.minute
+        
+        var time1IsGood = true
+        var time2IsGood = true
+        //print("")
+        
+        if( timeTableList[indexPath.section].endOneTime != ""){
+            let time1 = timeTableList[indexPath.section].endOneTime.componentsSeparatedByString(":")
+            let time1Hour = Int(time1[0])
+            let time1Min = Int(time1[1])
+            
+            time1IsGood = isTheTimeValid(time1Hour!, min: time1Min!, actualHour: nowHour, actualMin: nowMin)
+            
+        }
+        
+        if( timeTableList[indexPath.section].endTwoTime != ""){
+            let time1 = timeTableList[indexPath.section].endTwoTime.componentsSeparatedByString(":")
+            let time1Hour = Int(time1[0])
+            let time1Min = Int(time1[1])
+            
+            time2IsGood = isTheTimeValid(time1Hour!, min: time1Min!, actualHour: nowHour, actualMin: nowMin)
+        }
+        
+        if(time1IsGood){
+            myCell.endOneTimeLabel.textColor = UIColor.blackColor()
+        }else{
+            myCell.endOneTimeLabel.textColor = UIColor.grayColor()
+        }
+        
+        if(time2IsGood){
+            myCell.endTwoTimeLabel.textColor  = UIColor.blackColor()
+        }else{
+            myCell.endTwoTimeLabel.textColor  = UIColor.grayColor()
+        }
+        
         return myCell
 
+    }
+    
+    
+    func isTheTimeValid(hour:Int, min:Int, actualHour:Int, actualMin:Int)->Bool{
+        
+        //print("actual: \(actualHour):\(actualMin)")
+        //print("actual: \(min):\(hour)")
+        
+        if( hour > actualHour){
+            return true;
+        }
+        if(hour == actualHour){
+            if(min >= actualMin){
+                return true
+            }
+            return false
+        }
+        if(hour < actualHour){
+            return false;
+        }
+        return true
     }
     
     func loadTimeTableData() {
@@ -86,6 +147,8 @@ class TimeTableViewController: UIViewController, UITableViewDataSource, UITableV
             }
             }, lineName: self.line!.id)
     }
+    
+    
     /*
     if let results = json.array {
     for entry in results {
