@@ -56,7 +56,7 @@
 		90C0D91A1E0E9D6400FC9AD6 /* ic_arrow_back_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_arrow_back_2x.png; path = Images/ic_arrow_back_2x.png; sourceTree = "<group>"; };
 		90C0D91B1E0E9D6400FC9AD6 /* ic_arrow_back_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_arrow_back_3x.png; path = Images/ic_arrow_back_3x.png; sourceTree = "<group>"; };
 		90C0D91C1E0E9D6400FC9AD6 /* ic_arrow_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_arrow_back.png; path = Images/ic_arrow_back.png; sourceTree = "<group>"; };
-		90C0D9201E0E9EC900FC9AD6 /* TimeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
+		90C0D9201E0E9EC900FC9AD6 /* TimeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TimeTableViewController.swift; sourceTree = "<group>"; };
 		90C0D9221E0ED2E600FC9AD6 /* TimeTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; };
 		90C0D9241E0ED9D400FC9AD6 /* TimeTableCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableCustomCell.swift; sourceTree = "<group>"; };
 		90C0D9261E0EE08600FC9AD6 /* ic_directions_transit_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_directions_transit_2x.png; path = Images/ic_directions_transit_2x.png; sourceTree = "<group>"; };

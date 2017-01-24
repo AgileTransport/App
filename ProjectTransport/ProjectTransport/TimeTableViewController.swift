@@ -17,6 +17,7 @@ class TimeTableViewController: UIViewController, UITableViewDataSource, UITableV
     var delegate : ShowDetailDelegate!
     var line:BusLine!
     var timeTableList = [TimeTable]()
+    var indexForFirstAvailableTime = 0
     
     @IBOutlet weak var timeTable: UITableView!
     
@@ -28,8 +29,7 @@ class TimeTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        // Do any additional setup after loading the view, typically from a nib.
+        
         timeTable.dataSource = self
         timeTable.delegate = self
         loadTimeTableData()
@@ -37,8 +37,14 @@ class TimeTableViewController: UIViewController, UITableViewDataSource, UITableV
         title = "Line "+line.id
         endOneName.text = line!.endOne
         endTwoName.text = line!.endTwo
-
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let indexPath = NSIndexPath(forRow: 0, inSection: indexForFirstAvailableTime)
+        timeTable.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,76 +76,31 @@ class TimeTableViewController: UIViewController, UITableViewDataSource, UITableV
         myCell.endOneTimeLabel.text = timeTableList[indexPath.section].endOneTime
         myCell.endTwoTimeLabel.text = timeTableList[indexPath.section].endTwoTime
         
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components( [NSCalendarUnit.Hour, NSCalendarUnit.Minute], fromDate: date)
-        let nowHour = components.hour
-        let nowMin = components.minute
-        
-        var time1IsGood = true
-        var time2IsGood = true
-        //print("")
-        
-        if( timeTableList[indexPath.section].endOneTime != ""){
-            let time1 = timeTableList[indexPath.section].endOneTime.componentsSeparatedByString(":")
-            let time1Hour = Int(time1[0])
-            let time1Min = Int(time1[1])
-            
-            time1IsGood = isTheTimeValid(time1Hour!, min: time1Min!, actualHour: nowHour, actualMin: nowMin)
-            
-        }
-        
-        if( timeTableList[indexPath.section].endTwoTime != ""){
-            let time1 = timeTableList[indexPath.section].endTwoTime.componentsSeparatedByString(":")
-            let time1Hour = Int(time1[0])
-            let time1Min = Int(time1[1])
-            
-            time2IsGood = isTheTimeValid(time1Hour!, min: time1Min!, actualHour: nowHour, actualMin: nowMin)
-        }
-        
-        if(time1IsGood){
-            myCell.endOneTimeLabel.textColor = UIColor.blackColor()
-        }else{
-            myCell.endOneTimeLabel.textColor = UIColor.grayColor()
-        }
-        
-        if(time2IsGood){
-            myCell.endTwoTimeLabel.textColor  = UIColor.blackColor()
-        }else{
-            myCell.endTwoTimeLabel.textColor  = UIColor.grayColor()
-        }
-        
+
+        myCell.endOneTimeLabel.textColor = getColor(timeTableList[indexPath.section].endOneValid)
+        myCell.endTwoTimeLabel.textColor = getColor(timeTableList[indexPath.section].endTwoValid)
         return myCell
 
     }
     
-    
-    func isTheTimeValid(hour:Int, min:Int, actualHour:Int, actualMin:Int)->Bool{
-        
-        //print("actual: \(actualHour):\(actualMin)")
-        //print("actual: \(min):\(hour)")
-        
-        if( hour > actualHour){
-            return true;
+    func getColor(valid:Bool)->UIColor{
+        if(valid){
+            return UIColor.blackColor()
+        }else{
+            return UIColor.grayColor()
         }
-        if(hour == actualHour){
-            if(min >= actualMin){
-                return true
-            }
-            return false
-        }
-        if(hour < actualHour){
-            return false;
-        }
-        return true
     }
     
     func loadTimeTableData() {
 
         RestApiManager.sharedInstance.getTimeTableOfLine( { (json: JSON) in
             if let results = json.array {
-                for entry in results {
-                    self.timeTableList.append(TimeTable(json: entry))
+                for (index, entry) in results.enumerate() {
+                    let timeTableEntry = TimeTable(json: entry)
+                    self.timeTableList.append(timeTableEntry)
+                    if((timeTableEntry.endOneValid || timeTableEntry.endTwoValid) && self.indexForFirstAvailableTime == 0){
+                        self.indexForFirstAvailableTime = index
+                    }
                 }
                 dispatch_async(dispatch_get_main_queue(),{
                     self.timeTable!.reloadData()
@@ -147,16 +108,4 @@ class TimeTableViewController: UIViewController, UITableViewDataSource, UITableV
             }
             }, lineName: self.line!.id)
     }
-    
-    
-    /*
-    if let results = json.array {
-    for entry in results {
-    self.busLines.append(TimeTable(json: entry))
-    }
-    dispatch_async(dispatch_get_main_queue(),{
-    self.tableViewWidget!.reloadData()
-    })
-    }
-    */
 }
