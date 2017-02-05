@@ -16,6 +16,8 @@
 		9066B9771DE5E9CF0080B513 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9066B9761DE5E9CF0080B513 /* Assets.xcassets */; };
 		9066B97A1DE5E9CF0080B513 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9066B9781DE5E9CF0080B513 /* LaunchScreen.storyboard */; };
 		9066B9821DE5F0690080B513 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9066B9811DE5F0690080B513 /* MapViewController.swift */; };
+		909059EE1E476C9200785A21 /* AlarmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909059ED1E476C9200785A21 /* AlarmObject.swift */; };
+		909059F01E477BD600785A21 /* AlarmDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909059EF1E477BD600785A21 /* AlarmDetailViewController.swift */; };
 		90C0D9081E0D689300FC9AD6 /* ic_directions_bus_48pt_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C0D9021E0D689300FC9AD6 /* ic_directions_bus_48pt_2x.png */; };
 		90C0D9091E0D689300FC9AD6 /* ic_directions_bus_48pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C0D9031E0D689300FC9AD6 /* ic_directions_bus_48pt_3x.png */; };
 		90C0D90A1E0D689300FC9AD6 /* ic_directions_bus_48pt.png in Resources */ = {isa = PBXBuildFile; fileRef = 90C0D9041E0D689300FC9AD6 /* ic_directions_bus_48pt.png */; };
@@ -50,6 +52,8 @@
 		9066B9791DE5E9CF0080B513 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9066B97B1DE5E9CF0080B513 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9066B9811DE5F0690080B513 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		909059ED1E476C9200785A21 /* AlarmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmObject.swift; sourceTree = "<group>"; };
+		909059EF1E477BD600785A21 /* AlarmDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmDetailViewController.swift; sourceTree = "<group>"; };
 		90C0D9021E0D689300FC9AD6 /* ic_directions_bus_48pt_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_directions_bus_48pt_2x.png; path = Images/ic_directions_bus_48pt_2x.png; sourceTree = "<group>"; };
 		90C0D9031E0D689300FC9AD6 /* ic_directions_bus_48pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_directions_bus_48pt_3x.png; path = Images/ic_directions_bus_48pt_3x.png; sourceTree = "<group>"; };
 		90C0D9041E0D689300FC9AD6 /* ic_directions_bus_48pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_directions_bus_48pt.png; path = Images/ic_directions_bus_48pt.png; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 			children = (
 				905415F01E0AEFB8008055BC /* BusLine.swift */,
 				90C0D9221E0ED2E600FC9AD6 /* TimeTable.swift */,
+				909059ED1E476C9200785A21 /* AlarmObject.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 				AF976BB91E3E4376003A10FE /* NextArrivalTableCell.swift */,
 				AF976BBB1E3E4447003A10FE /* AlarmTableCell.swift */,
 				AF976BBD1E3E44D9003A10FE /* AlarmTableViewController.swift */,
+				909059EF1E477BD600785A21 /* AlarmDetailViewController.swift */,
 			);
 			path = ProjectTransport;
 			sourceTree = "<group>";
@@ -308,12 +314,14 @@
 				AF976BBE1E3E44D9003A10FE /* AlarmTableViewController.swift in Sources */,
 				90C0D9211E0E9EC900FC9AD6 /* TimeTableViewController.swift in Sources */,
 				90C0D9231E0ED2E700FC9AD6 /* TimeTable.swift in Sources */,
+				909059EE1E476C9200785A21 /* AlarmObject.swift in Sources */,
 				9066B9721DE5E9CE0080B513 /* LinesViewController.swift in Sources */,
 				9066B96E1DE5E9CE0080B513 /* AppDelegate.swift in Sources */,
 				9066B9701DE5E9CE0080B513 /* NextArrivalsViewController.swift in Sources */,
 				AF976BBA1E3E4376003A10FE /* NextArrivalTableCell.swift in Sources */,
 				AF976BBC1E3E4447003A10FE /* AlarmTableCell.swift in Sources */,
 				905415EE1E0AEA32008055BC /* RestApiManager.swift in Sources */,
+				909059F01E477BD600785A21 /* AlarmDetailViewController.swift in Sources */,
 				905415F11E0AEFB8008055BC /* BusLine.swift in Sources */,
 				9066B9821DE5F0690080B513 /* MapViewController.swift in Sources */,
 			);

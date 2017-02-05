@@ -10,10 +10,12 @@ import UIKit
 
 class AlarmTableCell: UITableViewCell {
 
-    @IBOutlet weak var timePicker: UIView!
+    @IBOutlet weak var lineNameLabel: UILabel!
+    
+    @IBOutlet weak var alarmFrequencyLabel: UILabel!
 
-    @IBOutlet weak var frequencyPicker: UIPickerView!
-
+    @IBOutlet weak var alarmTimeLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
