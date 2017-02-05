@@ -18,7 +18,9 @@ class AlarmTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var eventStore: EKEventStore!
     var reminders: [EKReminder]!
-
+    
+    var editReminder: EKReminder?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -175,6 +177,7 @@ class AlarmTableViewController: UIViewController, UITableViewDelegate, UITableVi
                 if let indexPath = tableViewWidget.indexPathForCell(
                     sender as! UITableViewCell) {
                     controller.currentAlarm = alarms[indexPath.row]
+                    editReminder = self.reminders[indexPath.row]
                 }
                 
                 controller.delegate = self
@@ -203,53 +206,7 @@ class AlarmTableViewController: UIViewController, UITableViewDelegate, UITableVi
             let dueDateComponents = self.dateComponentFromNSDate(alarm.date)
             newReminder.dueDateComponents = dueDateComponents
             
-            var dayList: [EKRecurrenceDayOfWeek]
-            dayList = []
-            switch(alarm.frequency){
-            case Frequencies.Monday:
-                dayList.append( EKRecurrenceDayOfWeek(.Monday))
-                break
-            case Frequencies.Tuesday:
-                dayList.append( EKRecurrenceDayOfWeek(.Tuesday))
-                break
-            case Frequencies.Wednesday:
-                dayList.append( EKRecurrenceDayOfWeek(.Wednesday))
-                break
-            case Frequencies.Thursday:
-                dayList.append( EKRecurrenceDayOfWeek(.Thursday))
-                break
-            case Frequencies.Friday:
-                dayList.append( EKRecurrenceDayOfWeek(.Friday))
-                break
-            case Frequencies.Saturday:
-                dayList.append( EKRecurrenceDayOfWeek(.Saturday))
-                break
-            case Frequencies.Sunday:
-                dayList.append( EKRecurrenceDayOfWeek(.Sunday))
-                break
-            case Frequencies.Everyday:
-                dayList.append( EKRecurrenceDayOfWeek(.Monday))
-                dayList.append( EKRecurrenceDayOfWeek(.Tuesday))
-                dayList.append( EKRecurrenceDayOfWeek(.Wednesday))
-                dayList.append( EKRecurrenceDayOfWeek(.Thursday))
-                dayList.append( EKRecurrenceDayOfWeek(.Friday))
-                dayList.append( EKRecurrenceDayOfWeek(.Saturday))
-                dayList.append( EKRecurrenceDayOfWeek(.Sunday))
-                break
-            case Frequencies.Weekend:
-                dayList.append( EKRecurrenceDayOfWeek(.Saturday))
-                dayList.append( EKRecurrenceDayOfWeek(.Sunday))
-                break
-            case Frequencies.Weekday:
-                dayList.append( EKRecurrenceDayOfWeek(.Monday))
-                dayList.append( EKRecurrenceDayOfWeek(.Tuesday))
-                dayList.append( EKRecurrenceDayOfWeek(.Wednesday))
-                dayList.append( EKRecurrenceDayOfWeek(.Thursday))
-                dayList.append( EKRecurrenceDayOfWeek(.Friday))
-                break
-            }
-            
-            let rule = EKRecurrenceRule(recurrenceWithFrequency: .Weekly, interval: 1, daysOfTheWeek: dayList, daysOfTheMonth: nil, monthsOfTheYear: nil, weeksOfTheYear: nil, daysOfTheYear: nil, setPositions: nil, end: nil)
+            let rule = EKRecurrenceRule(recurrenceWithFrequency: .Weekly, interval: 1, daysOfTheWeek: getDayList(alarm), daysOfTheMonth: nil, monthsOfTheYear: nil, weeksOfTheYear: nil, daysOfTheYear: nil, setPositions: nil, end: nil)
             newReminder.recurrenceRules = [rule]
             
             do {
@@ -271,9 +228,78 @@ class AlarmTableViewController: UIViewController, UITableViewDelegate, UITableVi
         return dateComponents
     }
     
+    func getDayList(alarm: AlarmObject) -> [EKRecurrenceDayOfWeek] {
+        
+        var dayList: [EKRecurrenceDayOfWeek]
+        dayList = []
+        switch(alarm.frequency){
+        case Frequencies.Monday:
+            dayList.append( EKRecurrenceDayOfWeek(.Monday))
+            break
+        case Frequencies.Tuesday:
+            dayList.append( EKRecurrenceDayOfWeek(.Tuesday))
+            break
+        case Frequencies.Wednesday:
+            dayList.append( EKRecurrenceDayOfWeek(.Wednesday))
+            break
+        case Frequencies.Thursday:
+            dayList.append( EKRecurrenceDayOfWeek(.Thursday))
+            break
+        case Frequencies.Friday:
+            dayList.append( EKRecurrenceDayOfWeek(.Friday))
+            break
+        case Frequencies.Saturday:
+            dayList.append( EKRecurrenceDayOfWeek(.Saturday))
+            break
+        case Frequencies.Sunday:
+            dayList.append( EKRecurrenceDayOfWeek(.Sunday))
+            break
+        case Frequencies.Everyday:
+            dayList.append( EKRecurrenceDayOfWeek(.Monday))
+            dayList.append( EKRecurrenceDayOfWeek(.Tuesday))
+            dayList.append( EKRecurrenceDayOfWeek(.Wednesday))
+            dayList.append( EKRecurrenceDayOfWeek(.Thursday))
+            dayList.append( EKRecurrenceDayOfWeek(.Friday))
+            dayList.append( EKRecurrenceDayOfWeek(.Saturday))
+            dayList.append( EKRecurrenceDayOfWeek(.Sunday))
+            break
+        case Frequencies.Weekend:
+            dayList.append( EKRecurrenceDayOfWeek(.Saturday))
+            dayList.append( EKRecurrenceDayOfWeek(.Sunday))
+            break
+        case Frequencies.Weekday:
+            dayList.append( EKRecurrenceDayOfWeek(.Monday))
+            dayList.append( EKRecurrenceDayOfWeek(.Tuesday))
+            dayList.append( EKRecurrenceDayOfWeek(.Wednesday))
+            dayList.append( EKRecurrenceDayOfWeek(.Thursday))
+            dayList.append( EKRecurrenceDayOfWeek(.Friday))
+            break
+        }
+
+        return dayList
+    }
+    
+    
     func listDetailViewController(controller: AlarmDetailViewController,
         didFinishEditing alarm: AlarmObject){
             print("edit")
+            if let remUp = self.editReminder{
+                remUp.title = alarm.lineId+" "+alarm.name
+                let dueDateComponents = self.dateComponentFromNSDate(alarm.date)
+                remUp.dueDateComponents = dueDateComponents
+                
+                
+                let rule = EKRecurrenceRule(recurrenceWithFrequency: .Weekly, interval: 1, daysOfTheWeek: getDayList(alarm), daysOfTheMonth: nil, monthsOfTheYear: nil, weeksOfTheYear: nil, daysOfTheYear: nil, setPositions: nil, end: nil)
+                remUp.recurrenceRules = [rule]
+                
+                do {
+                    try self.eventStore.saveReminder(remUp, commit: true)
+                }catch{
+                    print("Error creating and saving new reminder : \(error)")
+                }
+            }
+
+            
             tableViewWidget.reloadData()
             dismissViewControllerAnimated(true, completion: nil)
 
