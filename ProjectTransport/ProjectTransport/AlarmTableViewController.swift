@@ -8,6 +8,7 @@
 
 import SwiftyJSON
 import UIKit
+import EventKit
 
 class AlarmTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DetailViewControllerDelegate {
     
@@ -15,22 +16,82 @@ class AlarmTableViewController: UIViewController, UITableViewDelegate, UITableVi
 
     var alarms = [AlarmObject]()
     
-
-
+    var eventStore: EKEventStore!
+    var reminders: [EKReminder]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableViewWidget.dataSource = self
         tableViewWidget.delegate = self
-        
-        let alarm1 = AlarmObject(name: "alma", frequency: Frequencies.Everyday, date: NSDate(), lineId: "1")
-        let alarm21 = AlarmObject(name: "22alma", frequency: Frequencies.Sunday, date: NSDate(), lineId: "25")
-        self.alarms.append(alarm1)
-        self.alarms.append(alarm21)
 
         // Do any additional setup after loading the view.
+        eventStore = EKEventStore()
+        reminders = [EKReminder]()
+        loadReminders()
+    }
+    
+    func loadReminders(){
+        reminders = [EKReminder]()
+        alarms = []
+        self.eventStore.requestAccessToEntityType(EKEntityType.Reminder) { (granted: Bool, error: NSError?) -> Void in
+            if granted{
+                // 2
+                let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
+                self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
+                    
+                    self.reminders = reminders
+                    
+                    for rem in self.reminders{
+                        if let poz = rem.title.rangeOfString(" "){
+                            var freq : Frequencies
+                            freq = Frequencies.Monday
+                            if let fr = rem.recurrenceRules?.first?.daysOfTheWeek {
+                                if fr.count == 1 {
+                                    switch(fr[0]){
+                                    case EKRecurrenceDayOfWeek(.Monday):
+                                        freq = Frequencies.Monday
+                                        break
+                                    case EKRecurrenceDayOfWeek(.Tuesday):
+                                        freq = Frequencies.Tuesday
+                                        break
+                                    case EKRecurrenceDayOfWeek(.Wednesday):
+                                        freq = Frequencies.Wednesday
+                                        break
+                                    case EKRecurrenceDayOfWeek(.Thursday):
+                                        freq = Frequencies.Thursday
+                                        break
+                                    case EKRecurrenceDayOfWeek(.Friday):
+                                        freq = Frequencies.Friday
+                                        break
+                                    case EKRecurrenceDayOfWeek(.Saturday):
+                                        freq = Frequencies.Saturday
+                                        break
+                                    case EKRecurrenceDayOfWeek(.Sunday):
+                                        freq = Frequencies.Sunday
+                                        break
+                                    default:
+                                        break
+                                    }
+                                } else if fr.count == 2 {
+                                    freq = Frequencies.Weekend
+                                } else if fr.count == 5{
+                                    freq = Frequencies.Weekday
+                                } else if fr.count == 7{
+                                    freq = Frequencies.Everyday
+                                }
+                            }
+                            let alarmObj = AlarmObject(name: rem.title.substringFromIndex(poz.endIndex), frequency: freq, date: rem.dueDateComponents!.date!, lineId: rem.title.substringToIndex(poz.startIndex))
+                            self.alarms.append(alarmObj)
+                        }
+                    }
+                    self.tableViewWidget.reloadData()
+                })
+            }else{
+                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
+            }
         }
+    }
     
     private let dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
