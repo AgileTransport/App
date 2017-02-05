@@ -194,17 +194,111 @@ class AlarmTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func listDetailViewController(controller: AlarmDetailViewController,
         didFinishAdding alarm: AlarmObject){
-            alarms.append(alarm)
+            print("add")
+            
+            let newReminder = EKReminder(eventStore: self.eventStore)
+            newReminder.title = alarm.lineId+" "+alarm.name
+            newReminder.calendar = self.eventStore.defaultCalendarForNewReminders()
+            newReminder.completed = false
+            let dueDateComponents = self.dateComponentFromNSDate(alarm.date)
+            newReminder.dueDateComponents = dueDateComponents
+            
+            var dayList: [EKRecurrenceDayOfWeek]
+            dayList = []
+            switch(alarm.frequency){
+            case Frequencies.Monday:
+                dayList.append( EKRecurrenceDayOfWeek(.Monday))
+                break
+            case Frequencies.Tuesday:
+                dayList.append( EKRecurrenceDayOfWeek(.Tuesday))
+                break
+            case Frequencies.Wednesday:
+                dayList.append( EKRecurrenceDayOfWeek(.Wednesday))
+                break
+            case Frequencies.Thursday:
+                dayList.append( EKRecurrenceDayOfWeek(.Thursday))
+                break
+            case Frequencies.Friday:
+                dayList.append( EKRecurrenceDayOfWeek(.Friday))
+                break
+            case Frequencies.Saturday:
+                dayList.append( EKRecurrenceDayOfWeek(.Saturday))
+                break
+            case Frequencies.Sunday:
+                dayList.append( EKRecurrenceDayOfWeek(.Sunday))
+                break
+            case Frequencies.Everyday:
+                dayList.append( EKRecurrenceDayOfWeek(.Monday))
+                dayList.append( EKRecurrenceDayOfWeek(.Tuesday))
+                dayList.append( EKRecurrenceDayOfWeek(.Wednesday))
+                dayList.append( EKRecurrenceDayOfWeek(.Thursday))
+                dayList.append( EKRecurrenceDayOfWeek(.Friday))
+                dayList.append( EKRecurrenceDayOfWeek(.Saturday))
+                dayList.append( EKRecurrenceDayOfWeek(.Sunday))
+                break
+            case Frequencies.Weekend:
+                dayList.append( EKRecurrenceDayOfWeek(.Saturday))
+                dayList.append( EKRecurrenceDayOfWeek(.Sunday))
+                break
+            case Frequencies.Weekday:
+                dayList.append( EKRecurrenceDayOfWeek(.Monday))
+                dayList.append( EKRecurrenceDayOfWeek(.Tuesday))
+                dayList.append( EKRecurrenceDayOfWeek(.Wednesday))
+                dayList.append( EKRecurrenceDayOfWeek(.Thursday))
+                dayList.append( EKRecurrenceDayOfWeek(.Friday))
+                break
+            }
+            
+            let rule = EKRecurrenceRule(recurrenceWithFrequency: .Weekly, interval: 1, daysOfTheWeek: dayList, daysOfTheMonth: nil, monthsOfTheYear: nil, weeksOfTheYear: nil, daysOfTheYear: nil, setPositions: nil, end: nil)
+            newReminder.recurrenceRules = [rule]
+            
+            do {
+                try self.eventStore.saveReminder(newReminder, commit: true)
+            }catch{
+                print("Error creating and saving new reminder : \(error)")
+            }
+
+            loadReminders()
             tableViewWidget.reloadData()
             dismissViewControllerAnimated(true, completion: nil)
 
     }
     
+    func dateComponentFromNSDate(date: NSDate)-> NSDateComponents{
+        
+        let calendarUnit: NSCalendarUnit = [.Hour, .Day, .Month, .Year]
+        let dateComponents = NSCalendar.currentCalendar().components(calendarUnit, fromDate: date)
+        return dateComponents
+    }
+    
     func listDetailViewController(controller: AlarmDetailViewController,
         didFinishEditing alarm: AlarmObject){
+            print("edit")
             tableViewWidget.reloadData()
             dismissViewControllerAnimated(true, completion: nil)
 
+    }
+    
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if editingStyle == .Delete
+        {
+            let reminder: EKReminder = reminders[indexPath.row]
+            do{
+                try eventStore.removeReminder(reminder, commit: true)
+                self.reminders.removeAtIndex(indexPath.row)
+                self.alarms.removeAtIndex(indexPath.row)
+            }catch{
+                print("An error occurred while removing the reminder from the Calendar database: \(error)")
+            }
+            tableView.reloadData()
+        }
     }
 
 }
