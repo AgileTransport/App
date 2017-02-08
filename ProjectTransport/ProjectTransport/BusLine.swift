@@ -7,6 +7,7 @@
 //
 import SwiftyJSON
 import UIKit
+
 class BusLine: NSObject {
     var id :String
     var endOne : String

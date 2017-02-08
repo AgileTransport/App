@@ -33,6 +33,17 @@ class RestApiManager: NSObject {
             onCompletion(json as JSON)
         })
     }
+    
+    /**
+     * API which gets the arrival buses
+     **/
+    func getArrivals(onCompletion: (JSON) -> Void, latitude: String, longitude: String) {
+        let route = baseURL + "arrivals/?lat=" + latitude + "&long=" + longitude
+        makeHTTPGetRequest(route, onCompletion: { json, err in
+            onCompletion(json as JSON)
+        })
+    }
+
     func makeHTTPGetRequest(path: String, onCompletion: ServiceResponse) {
         let request = NSMutableURLRequest(URL: NSURL(string: path)!)
         

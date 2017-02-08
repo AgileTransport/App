@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -21,9 +21,29 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="89p-h2-yfB">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="sew-Tv-Btr">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Next Arrivals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8p-Jw-BKx">
+                                            <rect key="frame" x="158" y="31" width="99" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kv5-KK-793">
+                                            <rect key="frame" x="368" y="22" width="46" height="40"/>
+                                            <state key="normal" image="refresh"/>
+                                            <connections>
+                                                <action selector="refresh:" destination="9pv-A4-QxB" eventType="touchUpInside" id="CTK-el-XSB"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="nextArrivalCell" id="eWF-Td-lej" customClass="NextArrivalTableCell" customModule="ProjectTransport" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="88" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eWF-Td-lej" id="J2k-Ec-NOo">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="79"/>
@@ -183,7 +203,7 @@
                             <constraint firstItem="q0v-hZ-0A7" firstAttribute="top" secondItem="7v4-Wn-APF" secondAttribute="top" id="wmq-tn-CzG"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="4rX-UU-FJZ"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="gps" id="4rX-UU-FJZ"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
@@ -439,7 +459,7 @@
         <scene sceneID="YEs-zN-YTo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mh5-dx-qW5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Alarm" id="0bU-Jb-Yxr"/>
+                    <tabBarItem key="tabBarItem" title="Alarm" image="alarm" id="0bU-Jb-Yxr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fmu-ql-RhC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -474,9 +494,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="alarm" width="24" height="24"/>
         <image name="first" width="30" height="30"/>
+        <image name="gps" width="24" height="24"/>
         <image name="ic_arrow_back.png" width="24" height="24"/>
         <image name="ic_directions_transit.png" width="24" height="24"/>
+        <image name="refresh" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="7OF-nR-zOP"/>

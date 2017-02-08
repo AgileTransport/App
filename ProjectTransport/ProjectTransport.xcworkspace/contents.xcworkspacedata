@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:regionala.gpx">
+   </FileRef>
+   <FileRef
       location = "group:ProjectTransport.xcodeproj">
    </FileRef>
    <FileRef
